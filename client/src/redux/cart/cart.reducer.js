@@ -3,8 +3,10 @@ import { addItemToCart, removeItemFromCart } from './cart.utils'
 
 const INITIAL_STATE = {
   hidden: true,
-  cartItems: []
+  cartItems: [],
+  error: null
 }
+
 
 const cartReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
@@ -34,6 +36,20 @@ const cartReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         cartItems: []
+      }
+    case CartActionTypes.CREATE_DATABASE_CART_SUCCESS:
+    case CartActionTypes.GET_DATABSE_CART_SUCCESS:
+    case CartActionTypes.UPDATE_DATABASE_CART_SUCCESS:
+      return {
+        ...state,
+        cartItems: action.payload
+      }
+    case CartActionTypes.CREATE_DATABASE_CART_FAILURE:
+    case CartActionTypes.GET_DATABSE_CART_FAILURE:
+    case CartActionTypes.UPDATE_DATABASE_CART_FAILURE:
+      return {
+        ...state,
+        error: action.payload
       }
     default:
       return state

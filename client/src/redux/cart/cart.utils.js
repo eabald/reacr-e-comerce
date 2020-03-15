@@ -29,3 +29,7 @@ export const removeItemFromCart = (cartItems, cartItemToRemove) => {
       : cartItem
   )
 }
+
+export const mergeCarts = (dbCartItems, localCartItems) => {
+  return dbCartItems.map(item => addItemToCart(localCartItems, item))
+}

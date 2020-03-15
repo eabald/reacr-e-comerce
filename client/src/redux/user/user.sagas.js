@@ -5,12 +5,14 @@ import UserActionTypes from './user.types'
 import { auth, googleProvider, createUserProfileDocument, getCurrentUser } from '../../firebase/firebase.utils'
 
 import { signInSuccess, signInFailure, signOutSuccess, signOutFailure, signUpSuccess, signUpFailure } from "./user.actions"
+import {  } from "../cart/cart.actions";
 
 export function* getsnapshotFromUserAuth(userAuth) {
   try {
     const userRef = yield call(createUserProfileDocument, userAuth)
     const userSnapashot = yield userRef.get()
     yield put(signInSuccess({ id: userSnapashot.id, ...userSnapashot.data() }))
+    yield put()
   } catch (error) {
     yield put(signInFailure(error))
   }
